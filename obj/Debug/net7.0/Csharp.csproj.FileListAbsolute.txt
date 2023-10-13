@@ -1,0 +1,15 @@
+/home/onlyinc/Desktop/wunu/Csharp/bin/Debug/net7.0/Csharp
+/home/onlyinc/Desktop/wunu/Csharp/bin/Debug/net7.0/Csharp.deps.json
+/home/onlyinc/Desktop/wunu/Csharp/bin/Debug/net7.0/Csharp.runtimeconfig.json
+/home/onlyinc/Desktop/wunu/Csharp/bin/Debug/net7.0/Csharp.dll
+/home/onlyinc/Desktop/wunu/Csharp/bin/Debug/net7.0/Csharp.pdb
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.csproj.AssemblyReference.cache
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.GeneratedMSBuildEditorConfig.editorconfig
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.AssemblyInfoInputs.cache
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.AssemblyInfo.cs
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.csproj.CoreCompileInputs.cache
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.dll
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/refint/Csharp.dll
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.pdb
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/Csharp.genruntimeconfig.cache
+/home/onlyinc/Desktop/wunu/Csharp/obj/Debug/net7.0/ref/Csharp.dll
