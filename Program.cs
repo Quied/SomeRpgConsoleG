@@ -28,12 +28,28 @@ namespace AppConsole {
         public Person author;
         public DateTime publicationDate;
     }
+
     class ResearchTeam {
         private string researchTopic;
         private string Organization;
         private int number;
         private TimeFrame reseatchTime;
-    
+        // private Paper[];
+        
+        ResearchTeam(){
+            this.researchTopic = "Some topic";
+            this.Organization = "some org";
+            this.number = 44;
+            this.reseatchTime = new TimeFrame();  
+        }
+
+        ResearchTeam(string topic, string org, int number, TimeFrame team){
+            this.researchTopic = topic;
+            this.Organization = org;
+            this.number = number;
+            this.reseatchTime = team;
+        }
+
     }
 
 
