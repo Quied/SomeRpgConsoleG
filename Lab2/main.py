@@ -43,8 +43,8 @@ print(missing_val, " about is missing");
 
 
 # xp = np.array([])
-x = myCsv['CMPLNT_NUM'];
-y = myCsv['KY_CD'];
+x = myCsv['City'];
+y = myCsv['Amount'];
 plt.scatter(x,y);
 
 # Add labels and a title
