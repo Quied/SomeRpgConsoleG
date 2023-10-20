@@ -35,6 +35,15 @@ namespace AppConsole {
         private int number;
         private TimeFrame reseatchTime;
         // private Paper[];
+        //
+        public string researchTopic {
+            get {
+                return researchTopic;
+            }
+            set {
+                this.researchTopic = value;
+            }
+        };
         
         ResearchTeam(){
             this.researchTopic = "Some topic";
@@ -51,6 +60,7 @@ namespace AppConsole {
         }
 
     }
+    
 
 
     class Entry {
