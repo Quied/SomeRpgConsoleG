@@ -1,0 +1,15 @@
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.csproj.AssemblyReference.cache
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.GeneratedMSBuildEditorConfig.editorconfig
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.AssemblyInfoInputs.cache
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.AssemblyInfo.cs
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.csproj.CoreCompileInputs.cache
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/bin/Debug/net7.0/dotnet_lb3
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/bin/Debug/net7.0/dotnet_lb3.deps.json
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/bin/Debug/net7.0/dotnet_lb3.runtimeconfig.json
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/bin/Debug/net7.0/dotnet_lb3.dll
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/bin/Debug/net7.0/dotnet_lb3.pdb
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.dll
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/refint/dotnet_lb3.dll
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.pdb
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/dotnet_lb3.genruntimeconfig.cache
+/home/onlyinc/Desktop/WUNU/dotnet_lb3/obj/Debug/net7.0/ref/dotnet_lb3.dll

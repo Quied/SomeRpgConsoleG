@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZZfXUbXuQzGiPqS0oNiwBN51VWiXOiXcm7xrMYEql6szTm+8GAGFQAyUgAypW88a8SgUglrSteBjGNuaA0vLeg==",
+  "success": true,
+  "projectFilePath": "/home/onlyinc/Desktop/WUNU/dotnet_lb3/dotnet_lb3.csproj",
+  "expectedPackageFiles": [
+    "/home/onlyinc/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
