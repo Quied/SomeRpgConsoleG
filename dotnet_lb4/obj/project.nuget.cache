@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0k/2Wq0mK47GeBTqLuVrKcpdntx57jWOWqHTca1O9yOCOiuOM/FRPEpQEa/jEMvQqslwg2Rn1HpicCs4Wy9b9w==",
+  "success": true,
+  "projectFilePath": "/home/onlyinc/Desktop/WUNU/dotnet_lb4/dotnet_lb4.csproj",
+  "expectedPackageFiles": [
+    "/home/onlyinc/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.13/microsoft.aspnetcore.app.ref.7.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

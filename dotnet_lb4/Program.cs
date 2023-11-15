@@ -1,0 +1,5 @@
+﻿namespace MainApp {
+    class Solution {
+        
+    }
+}
