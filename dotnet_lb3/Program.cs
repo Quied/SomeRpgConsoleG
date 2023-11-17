@@ -1,5 +1,9 @@
 ﻿
 
+using System.Collections.Generic;
+
+
+
 namespace MainApp {
 
     class Person {
@@ -42,6 +46,16 @@ namespace MainApp {
             return _LastName + _Name;
         }
 
+        // public virtual bool Equals(object obj){
+        //     if(obj == null || GetType() != obj.GetType()){
+        //         return false;
+        //     }
+        // }
+
+        // public virtual int GetHashCode(){
+
+        // }
+
         // властивість типу int з методами get і set 
         // для отримання інформації (get) і зміни (set) 
         // року народження в закритому полі типу DateTime,
@@ -66,17 +80,21 @@ namespace MainApp {
             // publish_date = ''
         }
 
-        public override virtual string ToString(){
+        public override string ToString(){
             // return publish_name + 
+            return "123";
         }
 
-      class ResearchTeam {
+    }
+
+    class ResearchTeam {
+
         private string _Topic;
         private string _Organization;
         private int _Number;
 
         private TimeFrame _Duration;
-        private Paper papers[];
+        private Paper []_papers;
 
         ResearchTeam(string topic, string org, int num, TimeFrame frame) {
             _Topic = topic;
@@ -85,17 +103,54 @@ namespace MainApp {
             _Duration = frame;
         }
 
-        ResearchTeam(){
-            Topic = "Malwares";
+        public ResearchTeam(){
+            _Topic = "Malwares";
             _Organization = "OpenAi";
             _Number = 123;
             _Duration = TimeFrame.Long;
+
+            this.show_fields();
         }
+
+        public void show_fields(){
+            Console.WriteLine(this._Topic);
+            Console.WriteLine(this._Organization);
+            Console.WriteLine(this._Number);
+            Console.WriteLine(this._Duration);
+        }
+
+        public bool this[TimeFrame input] {
+            get => this._Duration == input;
+        }
+
+        public void addPapers(Paper papers){
+            
+        }
+
+        // public override string ToString(){
+
+        // }
+
+        // public virtual string ToShortString(){
+
+        // }
+
+        public Paper paper {
+            get { return this._papers.Length == 0 ? null : this._papers[this._papers.Length - 1]; }
+        }
+
+        // public object DeepCopy(ResearchTeam obj){
+        //     using (var ms = new MemoryStream()){
+        //         var formatter = new BinaryFormatter();
+        //         formatter.Serialize(ms, obj);
+        //         ms.Position = 0;
+
+        //         return (T) formatter.Deserialize(ms);
+        //     }
+        // }
 
       }
 
-
-    }
 
     enum TimeFrame {
         Year = 0,
@@ -103,13 +158,49 @@ namespace MainApp {
         Long = 2,
     }
 
+    // 4
+
+    interface INameAndCopy {
+
+    }
+
+    // 5
+    class TestCollections<T,E> {
+
+
+        public List<T> list;
+        public List<string> list_str;
+        public Dictionary<T,E> dict;
+        public Dictionary<string,E> dict_str;
+
+        TestCollections(){
+
+        }
+
+        // static E getLenght(int){
+
+        // }
+
+        TestCollections(int lenght){
+
+        }
+
+    }
+
+
 
     class Solution {
         static void Main(){
-            const int nrow = 10;
-            const int ncol = 10;
 
-            Person []data;
+            // 1 
+            ResearchTeam RTeam = new ResearchTeam();
+            bool isMatch = RTeam[TimeFrame.Long];
+            bool isMatch2 = RTeam[TimeFrame.Year];
+            bool isMatch3 = RTeam[TimeFrame.TwoYear];
+
+            Console.WriteLine("{0}, {1}, {2}", isMatch, isMatch2, isMatch3); // true false false
+
         }
     }
 }
+
