@@ -68,13 +68,13 @@ namespace MainApp {
         public Person person;
         public System.DateTime publish_date;
 
-        Paper(string pb_name, Person pers, System.DateTime pb_date){
+        public Paper(string pb_name, Person pers, System.DateTime pb_date){
             publish_name = pb_name;
             person = pers;
             publish_date = pb_date;
         }
 
-        Paper(){
+        public Paper(){
             publish_name = "Publishment name";
             // person = new Person;
             // publish_date = ''
@@ -108,7 +108,7 @@ namespace MainApp {
             _Organization = "OpenAi";
             _Number = 123;
             _Duration = TimeFrame.Long;
-
+            this._papers = new Paper[10];
             this.show_fields();
         }
 
@@ -123,8 +123,30 @@ namespace MainApp {
             get => this._Duration == input;
         }
 
-        public void addPapers(Paper papers){
-            
+        public void addPapers(Paper NPaper){
+            int arr_size = this._papers.Length;
+
+            Paper[] NArray = new Paper[arr_size + 1];
+
+            for(int i = 0; i < arr_size; i++){
+                NArray[i] = this._papers[i];
+            }
+
+            NArray[arr_size] = NPaper;
+            _papers = NArray;
+        }
+
+        public Paper getLast(){
+            for (int i = this._papers.Length - 1; i >= 0; i--){
+                if (this._papers[i] != null){
+                    return this._papers[i]; 
+                }
+            }
+            return null; 
+        }
+
+        public double calculateRunTime(){
+            return 0.0;
         }
 
         // public override string ToString(){
@@ -149,7 +171,7 @@ namespace MainApp {
         //     }
         // }
 
-      }
+    }
 
 
     enum TimeFrame {
@@ -192,14 +214,23 @@ namespace MainApp {
     class Solution {
         static void Main(){
 
-            // 1 
+            // 3 
             ResearchTeam RTeam = new ResearchTeam();
+            Paper paper = new Paper();
+
             bool isMatch = RTeam[TimeFrame.Long];
             bool isMatch2 = RTeam[TimeFrame.Year];
             bool isMatch3 = RTeam[TimeFrame.TwoYear];
 
             Console.WriteLine("{0}, {1}, {2}", isMatch, isMatch2, isMatch3); // true false false
 
+            RTeam.addPapers(paper);
+
+
+            // 4
+
+
+            // 5
         }
     }
 }
