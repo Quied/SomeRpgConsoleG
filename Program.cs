@@ -1,240 +1,219 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace MainApp {
+class TKeyBase
+{
+    public int Id { get; set; }
+}
 
-    interface INameAndCopy {
-        string Name { get; set; }
-        object DeepCopy();
+class TValueBase
+{
+    public int Id { get; set; }
+}
+
+class Magazine : TKeyBase
+{
+    public string Title { get; set; }
+    public Frequency Frequency { get; set; }
+    public DateTime ReleaseDate { get; set; }
+    public int Circulation { get; set; }
+    public List<Article> Articles { get; set; }
+
+    public Magazine(string title, Frequency frequency, DateTime releaseDate, int circulation)
+    {
+        Title = title;
+        Frequency = frequency;
+        ReleaseDate = releaseDate;
+        Circulation = circulation;
+        Articles = new List<Article>();
     }
 
-    class Person : INameAndCopy {
-        private string _Name;
-        private string _LastName;
-        private DateTime _Date;
+    public Magazine() : this("Default Title", Frequency.Monthly, DateTime.Now, 10000) { }
+}
 
-        public Person(string name, string lastname, DateTime date) {
-            _Name = name;
-            _LastName = lastname;
-            _Date = date;
-        }
+enum Frequency
+{
+    Weekly,
+    Monthly,
+    Yearly
+}
 
-        public Person() {
-            _Name = "Martin";
-            _LastName = "Alderson";
-        }
+class Article : TKeyBase
+{
+    public string Title { get; set; }
+    public double Rating { get; set; }
 
-        public DateTime Date {
-            get { return _Date; }
-            set { _Date = value; }
-        }
-
-        public string LastName {
-            get { return _LastName; }
-            set { _LastName = value; }
-        }
-
-        public string Name {
-            get { return _Name; }
-            set { _Name = value; }
-        }
-
-        public virtual string ToString() {
-            return _Name;
-        }
-
-        public virtual string ToShortString() {
-            return _LastName + _Name;
-        }
-
-        public object DeepCopy() {
-            return new Person(_Name, _LastName, _Date);
-        }
+    public Article(string title, double rating)
+    {
+        Title = title;
+        Rating = rating;
     }
 
-    class Paper : INameAndCopy {
-        public string PublishName;
-        public Person Author;
-        public DateTime PublishDate;
+    public Article() : this("Default Article", 0.0) { }
+}
 
-        public Paper(string pbName, Person author, DateTime pbDate) {
-            PublishName = pbName;
-            Author = author;
-            PublishDate = pbDate;
-        }
+class TValue : TValueBase
+{
+    public TKeyBase TKeyReference { get; set; }
+}
 
-        public Paper() {
-            PublishName = "Publishment name";
-        }
+class TestCollections
+{
+    private List<TKeyBase> listTKey;
+    private List<string> listString;
+    private Dictionary<TKeyBase, TValue> dictionaryTKey;
+    private Dictionary<string, TValue> dictionaryString;
 
-        public override string ToString() {
-            return PublishName;
-        }
-
-        public object DeepCopy() {
-            return new Paper(PublishName, (Person)Author.DeepCopy(), PublishDate);
-        }
+    public TestCollections(int numElements)
+    {
+        GenerateCollections(numElements);
     }
 
-    class ResearchTeam : INameAndCopy, IEnumerable {
-        private string _Topic;
-        private string _Organization;
-        private int _Number;
-        private TimeFrame _Duration;
-        private List<Paper> _papers;
+    private void GenerateCollections(int numElements)
+    {
+        listTKey = new List<TKeyBase>();
+        listString = new List<string>();
+        dictionaryTKey = new Dictionary<TKeyBase, TValue>();
+        dictionaryString = new Dictionary<string, TValue>();
 
-        public ResearchTeam(string topic, string org, int num, TimeFrame frame) {
-            _Topic = topic;
-            _Organization = org;
-            _Number = num;
-            _Duration = frame;
-            _papers = new List<Paper>();
-        }
+        for (int i = 0; i < numElements; i++)
+        {
+            TKeyBase key = new TKeyBase { Id = i };
+            TValue value = new TValue { Id = i, TKeyReference = key };
 
-        public ResearchTeam() {
-            _Topic = "Malwares";
-            _Organization = "OpenAi";
-            _Number = 123;
-            _Duration = TimeFrame.Long;
-            _papers = new List<Paper>();
-            ShowFields();
-        }
-
-        public void ShowFields() {
-            Console.WriteLine(_Topic);
-            Console.WriteLine(_Organization);
-            Console.WriteLine(_Number);
-            Console.WriteLine(_Duration);
-        }
-
-        public bool this[TimeFrame input] {
-            get => _Duration == input;
-        }
-
-        public void AddPaper(Paper newPaper) {
-            _papers.Add(newPaper);
-        }
-
-        public Paper LastPaper {
-            get { return _papers.Count == 0 ? null : _papers[_papers.Count - 1]; }
-        }
-
-        public object DeepCopy() {
-            ResearchTeam copy = new ResearchTeam(_Topic, _Organization, _Number, _Duration);
-            foreach (var paper in _papers) {
-                copy._papers.Add((Paper)paper.DeepCopy());
-            }
-            return copy;
-        }
-
-        public IEnumerator GetEnumerator() {
-            return new ResearchTeamEnumerator(this);
-        }
-
-        public IEnumerable GetPersonsMoreThanOnePublication() {
-            foreach (var paper in _papers) {
-                if (paper.Author != null && _papers.Count(p => p.Author == paper.Author) > 1) {
-                    yield return paper.Author;
-                }
-            }
-        }
-
-        public IEnumerable GetRecentPapers() {
-            foreach (var paper in _papers) {
-                if ((DateTime.Now - paper.PublishDate).TotalDays <= 365) {
-                    yield return paper;
-                }
-            }
+            listTKey.Add(key);
+            listString.Add(key.ToString());
+            dictionaryTKey[key] = value;
+            dictionaryString[key.ToString()] = value;
         }
     }
 
-    class ResearchTeamEnumerator : IEnumerator {
-        private ResearchTeam _team;
-        private int _index;
+    public void TestSearch(int elementIndex)
+    {
+        TKeyBase keyToSearch = listTKey[elementIndex];
 
-        public ResearchTeamEnumerator(ResearchTeam team) {
-            _team = team;
-            _index = -1;
-        }
-
-        public object Current {
-            get { return _team._papers[_index]; }
-        }
-
-        public bool MoveNext() {
-            _index++;
-            return _index < _team._papers.Count;
-        }
-
-        public void Reset() {
-            _index = -1;
-        }
+        SearchAndPrint("List<TKey>", () => listTKey.Contains(keyToSearch));
+        SearchAndPrint("List<string>", () => listString.Contains(keyToSearch.ToString()));
+        SearchAndPrint("Dictionary<TKey, TValue>", () => dictionaryTKey.ContainsKey(keyToSearch));
+        SearchAndPrint("Dictionary<string, TValue>", () => dictionaryString.ContainsKey(keyToSearch.ToString()));
     }
 
-    class Solution {
-        static void Main() {
-            // 1
-            ResearchTeam team1 = new ResearchTeam("Topic1", "Org1", 1, TimeFrame.Year);
-            ResearchTeam team2 = new ResearchTeam("Topic1", "Org1", 1, TimeFrame.Year);
+    private void SearchAndPrint(string collectionName, Func<bool> searchFunction)
+    {
+        Console.Write($"Searching in {collectionName}...");
+        var stopwatch = Stopwatch.StartNew();
+        bool result = searchFunction();
+        stopwatch.Stop();
+        Console.WriteLine($" Result: {result}, Time: {stopwatch.Elapsed.TotalMilliseconds} ms");
+    }
+}
 
-            Console.WriteLine($"Reference Equality: {ReferenceEquals(team1, team2)}"); // false
-            Console.WriteLine($"Object Equality: {team1.Equals(team2)}"); // false
+class MagazineCollection
+{
+    private List<Magazine> magazines;
 
-            // 2
-            try {
-                team1.Number = -1;
-            }
-            catch (ArgumentException ex) {
-                Console.WriteLine($"Exception: {ex.Message}");
-            }
+    public MagazineCollection()
+    {
+        magazines = new List<Magazine>();
+    }
 
-            // 3
-            Console.WriteLine($"Long Duration: {team1[TimeFrame.Long]}"); // false
+    public void AddMagazine(Magazine magazine)
+    {
+        magazines.Add(magazine);
+    }
 
-            // 4
-            Paper paper1 = new Paper("Paper1", new Person("Author1", "Last1", DateTime.Now), DateTime.Now);
-            Paper paper2 = new Paper("Paper2", new Person("Author2", "Last2", DateTime.Now), DateTime.Now);
+    public void PrintMagazines()
+    {
+        foreach (var magazine in magazines)
+        {
+            Console.WriteLine(magazine);
+        }
+        Console.WriteLine();
+    }
 
-            team1.AddPaper(paper1);
-            team1.AddPaper(paper2);
+    public void SortByTitle()
+    {
+        magazines.Sort((m1, m2) => string.Compare(m1.Title, m2.Title, StringComparison.Ordinal));
+        PrintMagazines();
+    }
 
-            Console.WriteLine($"Last Paper: {team1.LastPaper}");
+    public void SortByReleaseDate()
+    {
+        magazines.Sort((m1, m2) => m1.ReleaseDate.CompareTo(m2.ReleaseDate));
+        PrintMagazines();
+    }
 
-            // 5
-            ResearchTeam teamCopy = (ResearchTeam)team1.DeepCopy();
-            team1.LastPaper.PublishName = "Modified Paper";
-            Console.WriteLine($"Original Team: {team1.LastPaper}");
-            Console.WriteLine($"Copied Team: {teamCopy.LastPaper}");
+    public void SortByCirculation()
+    {
+        magazines.Sort((m1, m2) => m1.Circulation.CompareTo(m2.Circulation));
+        PrintMagazines();
+    }
 
-            // 6
-            Console.WriteLine("Persons with More than One Publication:");
-            foreach (Person person in team1.GetPersonsMoreThanOnePublication()) {
-                Console.WriteLine(person.ToShortString());
-            }
+    public void MaxAverageRating()
+    {
+        double maxRating = magazines.Max(m => m.Articles.Any() ? m.Articles.Average(a => a.Rating) : 0.0);
+        Console.WriteLine($"Max Average Rating: {maxRating}");
+    }
 
-            // 7
-            Console.WriteLine("Recent Papers:");
-            foreach (Paper paper in team1.GetRecentPapers()) {
-                Console.WriteLine(paper.PublishName);
-            }
+    public void FilterByFrequency(Frequency frequency)
+    {
+        var filteredMagazines = magazines.Where(m => m.Frequency == frequency).ToList();
+        Console.WriteLine($"Magazines with {frequency} frequency:");
+        foreach (var magazine in filteredMagazines)
+        {
+            Console.WriteLine(magazine);
+        }
+        Console.WriteLine();
+    }
 
-            // 8
-            Console.WriteLine("Team Members with Publications:");
-            foreach (Person person in team1) {
-                Console.WriteLine(person.ToShortString());
-            }
-
-            // 9
-            Console.WriteLine("Team Members with More than One Publication:");
-            foreach (Person person in team1.GetPersonsMoreThanOnePublication()) {
-                Console.WriteLine(person.ToShortString());
-            }
-
-            // 10
-            Console.WriteLine("Recent Papers:");
-            foreach (Paper paper in team1.GetRecentPapers()) {
-                Console.WriteLine(paper.PublishName);
+    public void GroupByAverageRating()
+    {
+        var groupedMagazines = magazines.GroupBy(m => m.Articles.Any() ? m.Articles.Average(a => a.Rating) : 0.0);
+        Console.WriteLine("Grouped Magazines by Average Rating:");
+        foreach (var group in groupedMagazines)
+        {
+            Console.WriteLine($"Average Rating: {group.Key}");
+            foreach (var magazine in group)
+            {
+                Console.WriteLine($"  {magazine}");
             }
         }
+        Console.WriteLine();
+    }
+}
+
+class Solution
+{
+    static void Main()
+    {
+        // Variant 1
+        Console.WriteLine("Variant 1:");
+        TestCollections testCollections1 = new TestCollections(1000000);
+        testCollections1.TestSearch(0);
+        testCollections1.TestSearch(500000);
+        testCollections1.TestSearch(999999);
+        testCollections1.TestSearch(2000000);
+
+        // Variant 2
+        Console.WriteLine("\nVariant 2:");
+        MagazineCollection magazineCollection = new MagazineCollection();
+        magazineCollection.AddMagazine(new Magazine("Magazine1", Frequency.Weekly, DateTime.Now, 5000));
+        magazineCollection.AddMagazine(new Magazine("Magazine2", Frequency.Monthly, DateTime.Now.AddMonths(-1), 8000));
+        magazineCollection.AddMagazine(new Magazine("Magazine3", Frequency.Yearly, DateTime.Now.AddYears(-1), 10000));
+        magazineCollection.PrintMagazines();
+
+        Console.WriteLine("Sorting by Title:");
+        magazineCollection.SortByTitle();
+
+        Console.WriteLine("Sorting by Release Date:");
+        magazineCollection.SortByReleaseDate();
+
+        Console.WriteLine("Sorting by Circulation:");
+        magazineCollection.SortByCirculation();
+
+        magazineCollection.MaxAverageRating();
+        magazineCollection.FilterByFrequency(Frequency.Monthly);
+        magazineCollection.GroupByAverageRating();
     }
 }
