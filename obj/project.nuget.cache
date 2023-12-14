@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZB9bWYW07vTsU0fYq92YdKjZ2BR+LvGGsyjTecjDyvq4u1QfLlS0wP74Bf8wB7e17kN13fogjXn3ZbiJOUUDXg==",
+  "success": true,
+  "projectFilePath": "/home/onlyinc/Desktop/charp/csharp-lab-4/csharp-lab-4.csproj",
+  "expectedPackageFiles": [
+    "/home/onlyinc/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.0/microsoft.aspnetcore.app.ref.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
