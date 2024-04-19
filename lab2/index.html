@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php include 'menu.php';?>
+
+    <h1>Hello world</h1>
+    
+
+    <script>
+        var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff', '#000000'];
+        var currentIndex = 0;
+
+        function changeBackground() {
+            document.body.style.backgroundColor = colors[currentIndex];
+            currentIndex = (currentIndex + 1) % colors.length;
+        }
+
+        // Змінюємо фон кожні 10 секунд
+        setInterval(changeBackground, 500);
+    </script>
+</body>
+</html>
