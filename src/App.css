@@ -13,6 +13,13 @@
   }
 }
 
+.Wrapper {
+  width: 100%;
+  justify-content: space-around;
+  display: flex;
+  text-align: left;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
